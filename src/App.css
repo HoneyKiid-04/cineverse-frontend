@@ -1,8 +1,9 @@
 #root {
   /* margin: auto; */
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -40,4 +41,195 @@
 
 .read-the-docs {
   color: #888;
+}
+
+:root {
+  --primary-color: #1A1D24;    /* Darker background, more cinematic */
+  --secondary-color: #2C3440;  /* Slightly lighter for cards */
+  --accent-color: #5C6BC0;    /* Modern indigo for interactive elements */
+  --text-color: #FF7D54;      /* Warmer orange for emphasis */
+  --light-text: #EDF2F7;      /* Softer white for better readability */
+}
+
+.navbar-custom {
+  background-color: var(--primary-color) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#root {
+  background-color: var(--primary-color);
+  color: var(--light-text);
+}
+.navbar{
+  height: 80px;
+}
+
+.navbar-brand {
+  color: var(--text-color) !important;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.search-input {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--accent-color);
+  color: var(--light-text);
+  border-radius: 20px;
+  padding: 8px 16px;
+  width: 300px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  background-color: var(--secondary-color);
+  border-color: var(--text-color);
+  color: var(--light-text);
+  box-shadow: none;
+}
+
+.search-input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.btn-custom {
+  background-color: var(--accent-color);
+  color: var(--light-text);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+}
+
+.avatar-container {
+  background-color: var(--accent-color);
+  transition: all 0.3s ease;
+}
+
+.avatar-container:hover {
+  background-color: var(--text-color);
+}
+.content-card {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  padding: 0;
+}
+
+.content-card:hover {
+  transform: translateY(-5px);
+}
+
+.content-card .card-body {
+  background-color: var(--secondary-color);
+  color: var(--light-text);
+  border-radius: 0 0 12px 12px;
+  padding: 1rem;
+}
+
+.content-card .card-title {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content-card .card-text {
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 4.2em;
+}
+
+.content-badge {
+  background-color: var(--accent-color) !important;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.rating-badge {
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.auth-container {
+  background-color: var(--primary-color);
+  min-height: 100vh;
+}
+
+.auth-card {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 12px;
+}
+
+.auth-card .card-body {
+  color: var(--light-text);
+}
+
+.auth-card h2 {
+  color: var(--text-color);
+}
+
+.auth-input {
+  background-color: var(--primary-color);
+  border: 1px solid var(--accent-color);
+  color: var(--light-text);
+  border-radius: 8px;
+}
+
+.auth-input:focus {
+  background-color: var(--primary-color);
+  border-color: var(--text-color);
+  color: var(--light-text);
+  box-shadow: none;
+}
+
+.auth-btn {
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--light-text);
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+}
+
+.auth-link {
+  color: var(--text-color);
+}
+
+.auth-link:hover {
+  color: var(--accent-color);
+}
+
+.pagination .page-link {
+  background-color: var(--secondary-color);
+  border-color: var(--accent-color);
+  color: var(--light-text);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--light-text);
+}
+
+.pagination .disabled .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
 }

@@ -12,15 +12,15 @@ const Login = () => {
     e.preventDefault();
     try {
       await authService.login(email, password);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100">
-      <div className="card shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
+    <div className="auth-container d-flex justify-content-center align-items-center">
+      <div className="card auth-card shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="card-body p-5">
           <h2 className="text-center mb-4">Sign In</h2>
           {error && (
@@ -34,7 +34,7 @@ const Login = () => {
               <input
                 id="email"
                 type="email"
-                className="form-control"
+                className="form-control auth-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -45,18 +45,18 @@ const Login = () => {
               <input
                 id="password"
                 type="password"
-                className="form-control"
+                className="form-control auth-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100 mb-3">
+            <button type="submit" className="btn auth-btn w-100 mb-3">
               Sign In
             </button>
             <p className="text-center mb-0">
               Don't have an account?{' '}
-              <Link to="/register" className="text-decoration-none">
+              <Link to="/register" className="auth-link text-decoration-none">
                 Register here
               </Link>
             </p>

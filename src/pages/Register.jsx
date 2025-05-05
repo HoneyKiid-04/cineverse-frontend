@@ -13,15 +13,15 @@ const Register = () => {
     e.preventDefault();
     try {
       await authService.register(username, email, password);
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100">
-      <div className="card shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
+    <div className="auth-container d-flex justify-content-center align-items-center">
+      <div className="card auth-card shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="card-body p-5">
           <h2 className="text-center mb-4">Create Account</h2>
           {error && (
@@ -35,7 +35,7 @@ const Register = () => {
               <input
                 id="username"
                 type="text"
-                className="form-control"
+                className="form-control auth-input"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -46,7 +46,7 @@ const Register = () => {
               <input
                 id="email"
                 type="email"
-                className="form-control"
+                className="form-control auth-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -57,18 +57,18 @@ const Register = () => {
               <input
                 id="password"
                 type="password"
-                className="form-control"
+                className="form-control auth-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100 mb-3">
+            <button type="submit" className="btn auth-btn w-100 mb-3">
               Create Account
             </button>
             <p className="text-center mb-0">
               Already have an account?{' '}
-              <Link to="/login" className="text-decoration-none">
+              <Link to="/login" className="auth-link text-decoration-none">
                 Sign in here
               </Link>
             </p>

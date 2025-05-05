@@ -9,8 +9,9 @@ const authService = {
         email,
         password
       });
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data));
+      if (response.data) {
+        localStorage.setItem('token', JSON.stringify(response.data.data.token));
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
       }
       return response.data;
     } catch (error) {
@@ -25,6 +26,10 @@ const authService = {
         email,
         password
       });
+      if (response.data) {
+        localStorage.setItem('token', JSON.stringify(response.data.data.token));
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      }
       return response.data;
     } catch (error) {
       throw error;
