@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 
 const Header = () => {
   const user = JSON.parse(localStorage.getItem('user')) || {};
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const navigate = useNavigate();
+
   const getInitials = (username) => {
     if (!username) return '?';
     return username
@@ -17,8 +18,7 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // TODO: Implement search functionality
-    console.log('Searching for:', searchQuery);
+    navigate(`/?search=${encodeURIComponent(searchQuery)}`);
   };
 
   const renderAvatar = () => {

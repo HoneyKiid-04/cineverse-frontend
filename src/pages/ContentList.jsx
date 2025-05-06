@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import contentService from '../services/contentService';
 import Header from '../components/Header';
 
@@ -7,16 +8,26 @@ const ContentList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
+
   const pageSize = 12; 
 
   useEffect(() => {
     fetchContents();
-  }, [currentPage]);
+  }, [currentPage, searchParams]);
 
   const fetchContents = async () => {
     try {
       setLoading(true);
-      const response = await contentService.listContents(currentPage, pageSize);
+      const searchQuery = searchParams.get('search');
+      let response;
+      
+      if (searchQuery) {
+        response = await contentService.searchByTitle(searchQuery);
+      } else {
+        response = await contentService.listContents(currentPage, pageSize);
+      }
+      
       setContents(response.data.contents);
       setError(null);
     } catch (err) {
