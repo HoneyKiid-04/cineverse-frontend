@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import contentService from '../services/contentService';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const ContentList = () => {
   const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchParams] = useSearchParams();
-
-  const pageSize = 12; 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  
+  const pageSize = 12;
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
   useEffect(() => {
     fetchContents();
@@ -21,13 +23,13 @@ const ContentList = () => {
       setLoading(true);
       const searchQuery = searchParams.get('search');
       let response;
-      
+
       if (searchQuery) {
         response = await contentService.searchByTitle(searchQuery);
       } else {
         response = await contentService.listContents(currentPage, pageSize);
       }
-      
+
       setContents(response.data.contents);
       setError(null);
     } catch (err) {
@@ -36,6 +38,12 @@ const ContentList = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 1) return;
+    setSearchParams({ ...searchParams, page: newPage });
+    navigate(`?page=${newPage}`);
   };
 
   if (loading) {
@@ -68,9 +76,13 @@ const ContentList = () => {
     <>
       <Header />
       <div className="container py-4">
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
           {contents.map((content) => (
-            <div key={content.id} className="col">
+            <Link 
+              to={`/content/${content.ID}`} 
+              key={content.id} 
+              className="col text-decoration-none"
+            >
               <div className="card content-card h-100">
                 <img
                   src={content.poster_url || 'https://via.placeholder.com/300x450'}
@@ -87,17 +99,17 @@ const ContentList = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         {contents.length > 0 && (
           <nav className="mt-4">
-            <ul className="pagination justify-content-center">
+            <ul className="pagination justify-content-center gap-2">
               <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                 <button
                   className="page-link"
-                  onClick={() => setCurrentPage(prev => prev - 1)}
+                  onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
                 >
                   Previous
@@ -106,7 +118,7 @@ const ContentList = () => {
               <li className="page-item">
                 <button
                   className="page-link"
-                  onClick={() => setCurrentPage(prev => prev + 1)}
+                  onClick={() => handlePageChange(currentPage + 1)}
                 >
                   Next
                 </button>
@@ -115,6 +127,7 @@ const ContentList = () => {
           </nav>
         )}
       </div>
+      <Footer />
     </>
   );
 };
