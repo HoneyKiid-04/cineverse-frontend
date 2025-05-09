@@ -3,6 +3,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ContentList from './pages/ContentList';
 import FullContentPage from './pages/FullContentPage';
+import UserProfilePage from './pages/UserProfilePage';
+
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/content/:id" element={<FullContentPage />} />
+        <Route path="/profile/:userId" element={<UserProfilePage />} />
+
         {/* Add other routes here */}
       </Routes>
     </Router>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link , useNavigate} from 'react-router-dom';
 
 const Header = () => {
-  const user = JSON.parse(localStorage.getItem('user')) || {};
+  const user = JSON.parse(localStorage.getItem('user')) || {};  
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -24,6 +24,8 @@ const Header = () => {
   const renderAvatar = () => {
     if (user.avatar_url) {
       return (
+        <Link to={`/profile/${user.ID}`}>
+
         <img
           src={user.avatar_url}
           alt="User avatar"
@@ -33,10 +35,14 @@ const Header = () => {
           style={{ cursor: 'pointer' }}
           data-bs-toggle="dropdown"
         />
+                </Link>
+
       );
     }
 
     return (
+      <Link to={`/profile/${user.ID}`}>
+
       <div
         className="rounded-circle avatar-container d-flex align-items-center justify-content-center"
         style={{
@@ -50,6 +56,7 @@ const Header = () => {
       >
         {getInitials(user.username)}
       </div>
+      </Link>
     );
   };
   
