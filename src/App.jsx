@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import ContentList from './pages/ContentList';
 import FullContentPage from './pages/FullContentPage';
 import UserProfilePage from './pages/UserProfilePage';
+import CreateContentPage from './pages/ContentCreatePage';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/content/:id" element={<FullContentPage />} />
         <Route path="/profile/:userId" element={<UserProfilePage />} />
-
+        <Route path="/content/create" element={<CreateContentPage/>}/>
         {/* Add other routes here */}
       </Routes>
     </Router>
