@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/v1/profile';
-
+const API_URL = `${import.meta.env.VITE_API_URL}/profile`;
 // Helper function to get auth token
 const getAuthToken = () => {
     const token = localStorage.getItem('token');
