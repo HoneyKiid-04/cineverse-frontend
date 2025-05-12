@@ -5,6 +5,7 @@ import ContentList from './pages/ContentList';
 import FullContentPage from './pages/FullContentPage';
 import UserProfilePage from './pages/UserProfilePage';
 import CreateContentPage from './pages/ContentCreatePage';
+import ContentUpdatePage from './pages/ContentUpdatePage';
 
 
 function App() {
@@ -17,8 +18,7 @@ function App() {
         <Route path="/content/:id" element={<FullContentPage />} />
         <Route path="/profile/:userId" element={<UserProfilePage />} />
         <Route path="/content/create" element={<CreateContentPage/>}/>
-        {/* Add other routes here */}
-      </Routes>
+        <Route path="/content/update/:id" element={<ContentUpdatePage />} />      </Routes>
     </Router>
   );
 }

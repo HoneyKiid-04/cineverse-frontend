@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import contentService from '../services/contentService';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -9,9 +9,15 @@ const FullContentPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchContent = async () => {
+    const fetchData = async () => {
+      // Get user from localStorage
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      setUser(storedUser);
+
       try {
         setLoading(true);
         const response = await contentService.getContentById(id);
@@ -25,7 +31,7 @@ const FullContentPage = () => {
       }
     };
 
-    fetchContent();
+    fetchData();
   }, [id]);
 
   if (loading) {
@@ -91,13 +97,21 @@ const FullContentPage = () => {
             {/* Title and Meta */}
             <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
               <h1 className="display-5 fw-bold">{content.title}</h1>
-              <div className="d-flex gap-2">
+              <div className="d-flex gap-2 align-items-center">
                 <span className="badge bg-secondary px-3 py-2 fs-6">
                   <i className="bi bi-camera-reels-fill me-1"></i> {content.type}
                 </span>
                 <span className="badge bg-warning text-dark px-3 py-2 fs-6">
                   <i className="bi bi-star-fill me-1"></i> {content.rating.toFixed(1)}
                 </span>
+                {user?.role === 'moderator' && (
+                  <button
+                    className="btn btn-primary btn-sm"
+                    onClick={() => navigate(`/content/update/${id}`)}
+                  >
+                    <i className="bi bi-pencil-fill me-1"></i> Edit
+                  </button>
+                )}
               </div>
             </div>
 

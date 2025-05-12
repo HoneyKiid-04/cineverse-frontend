@@ -49,12 +49,12 @@ const UserProfilePage = () => {
   const handleChangePassword = async (e) => {
     e.preventDefault();
     const passwordData = {
-      currentPassword: e.target.currentPassword.value,
-      newPassword: e.target.newPassword.value
+      current_password: e.target.currentPassword.value,
+      new_password: e.target.newPassword.value
     };
 
     try {
-      await userService.changePassword(userId, passwordData);
+      await userService.changePassword( passwordData);
       setError('');
       navigate('/login');
     } catch (err) {
@@ -135,26 +135,37 @@ const UserProfilePage = () => {
             </div>
           </div>
           <div className="col-md-9">
-            <ul className="nav nav-tabs mb-4">
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${activeTab === 'profile' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('profile')}
-                  style={{ color: 'var(--light-text)' }}
-                >
-                  Profile
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${activeTab === 'password' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('password')}
-                  style={{ color: 'var(--light-text)' }}
-                >
-                  Change Password
-                </button>
-              </li>
-            </ul>
+          <ul className="nav nav-tabs mb-4 border-0">
+  <li className="nav-item">
+    <button
+      className="nav-link"
+      onClick={() => setActiveTab('profile')}
+      style={{
+        backgroundColor: 'transparent',
+        border: 'none',
+        borderBottom: activeTab === 'profile' ? '3px solid var(--text-color)' : '3px solid transparent',
+        color: activeTab === 'profile' ? 'var(--text-color)' : 'var(--light-text)'
+      }}
+    >
+      Profile
+    </button>
+  </li>
+  <li className="nav-item">
+    <button
+      className="nav-link"
+      onClick={() => setActiveTab('password')}
+      style={{
+        backgroundColor: 'transparent',
+        border: 'none',
+        borderBottom: activeTab === 'password' ? '3px solid var(--text-color)' : '3px solid transparent',
+        color: activeTab === 'password' ? 'var(--text-color)' : 'var(--light-text)'
+      }}
+    >
+      Change Password
+    </button>
+  </li>
+</ul>
+
 
             {activeTab === 'profile' && (
               <div className="card" style={{ backgroundColor: 'var(--secondary-color)' }}>

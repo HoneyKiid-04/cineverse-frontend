@@ -12,6 +12,8 @@ const authService = {
       if (response.data) {
         localStorage.setItem('token', JSON.stringify(response.data.data.token));
         localStorage.setItem('user', JSON.stringify(response.data.data.user));
+        console.log(response.data.data.user);
+        
       }
       return response.data;
     } catch (error) {
